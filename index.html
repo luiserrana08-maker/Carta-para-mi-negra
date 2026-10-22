@@ -197,36 +197,31 @@
             </div>
 
             <!-- GALERÍA DE FOTOS -->
-            <section class="galeria">
+<section class="galeria">
 
-                <div class="foto-recuerdo">
-                    <img
-                        src="https://i.ibb.co/p6RtQ5hP/IMG-20220922-173935.jpg"
-                        alt="Un recuerdo especial"
-                        loading="lazy">
-                </div>
+    <div class="carrusel-fondo" id="carrusel">
+        <div class="carrusel-pista">
 
-                <div class="foto-recuerdo">
-                    <img
-                        src="https://i.ibb.co/4Zm2nNvH/1792691808095.jpg"
-                        alt="Otro recuerdo de nuestra amistad"
-                        loading="lazy">
-                </div>
+            <div class="diapositiva">
+                <img src="https://i.ibb.co/p6RtQ5hP/IMG-20220922-173935.jpg" alt="Recuerdo 1">
+            </div>
 
-                <div class="foto-recuerdo">
-                    <img
-                        src="https://i.ibb.co/sdqLS2t0/1792692250862.jpg"
-                        alt="Un recuerdo de nuestra amistad"
-                        loading="lazy">
-                </div>
+            <div class="diapositiva">
+                <img src="https://i.ibb.co/4Zm2nNvH/1792691808095.jpg" alt="Recuerdo 2">
+            </div>
 
-                <div class="foto-recuerdo">
-                    <img
-                        src="https://i.ibb.co/Xf6745Zg/1792692178609.jpg"
-                        alt="Otro momento especial"
-                        loading="lazy">
-                </div>
-            </section>
+            <div class="diapositiva">
+                <img src="https://i.ibb.co/sdqLS2t0/1792692250862.jpg" alt="Recuerdo 3">
+            </div>
+
+            <div class="diapositiva">
+                <img src="https://i.ibb.co/Xf6745Zg/1792692178609.jpg" alt="Recuerdo 4">
+            </div>
+
+        </div>
+    </div>
+</section>
+
 
         </main>
     </div>
@@ -235,6 +230,12 @@
 </html>
 
 <style>
+
+/* =================================
+   CARTA DE CUMPLEAÑOS
+   Crema, rosa y detalles dorados
+================================= */
+
 
 /* =================================
    CARTA DE CUMPLEAÑOS
@@ -705,9 +706,103 @@ html body .container .text p .mejor-amigo {
     }
 }
 
-</style>
-<script>
+/* Carrusel de recuerdos */
 
+
+.carrusel-fondo {
+    width: 100%;
+    overflow: hidden;
+    padding: 22px 0;
+    background: #0A1A30;
+    border-radius: 12px;
+    position: relative;
+}
+
+.carrusel-pista {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: max-content;
+    animation: pasarFotos 20s linear infinite;
+}
+
+.diapositiva {
+    flex: 0 0 230px;
+    height: 300px;
+    overflow: hidden;
+    border: 1px solid #526985;
+    border-radius: 10px;
+    opacity: 0.55;
+    transform: scale(0.88);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.diapositiva img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* Movimiento continuo de las fotografías */
+@keyframes pasarFotos {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(-246px * 4));
+    }
+}
+
+.carrusel-fondo:hover .carrusel-pista {
+    animation-play-state: paused;
+}
+
+.texto-carrusel {
+    color: #526985;
+    text-align: center;
+    font-style: italic;
+    margin-top: 15px;
+}
+
+@media (max-width: 480px) {
+    .diapositiva {
+        flex-basis: 190px;
+        height: 250px;
+    }
+
+    @keyframes pasarFotos {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(calc(-206px * 4));
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .carrusel-pista {
+        animation: none;
+    }
+}
+
+
+/* =================================
+   RESPETAR REDUCCIÓN DE ANIMACIONES
+================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+</style>
 document.addEventListener("DOMContentLoaded", function () {
     const sobre = document.getElementById("sobre-inicial");
     const boton = document.getElementById("abrir-sobre");
@@ -733,5 +828,3 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 450);
     });
 });
-
-</script>
